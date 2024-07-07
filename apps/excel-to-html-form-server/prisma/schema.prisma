@@ -1,0 +1,37 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model FormulaResult {
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  formulaReference String?
+  formulaResult    String?
+}
+
+model ExcelFile {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  fileContent Json?
+  fileName    String?
+}
+
+model Cell {
+  id            String            @id @default(cuid())
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  cellValue     String?
+  cellType      EnumCellCellType?
+  cellReference String?
+}
+
+enum EnumCellCellType {
+  Option1
+}
